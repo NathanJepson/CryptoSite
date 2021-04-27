@@ -60,7 +60,7 @@ include 'navbar.php';
        //showLetters(body, heading1);
        $(window).load(function(){ 
            switchLetters(bodyFed, heading1, 4); 
-           $('footer').html("<img id=\"myImg\" src=\"img/Constitution.png\" alt=Constitution>");
+           $('footer').html("<img id=\"myImg\" src=\"1200px-Constitution_of_the_United_States,_page_1.png\" alt=Constitution>");
        })
     </script>
 

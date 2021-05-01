@@ -13,6 +13,7 @@
     <link href="CSS/Boot_CSS/bootstrap-theme.min.css" type="text/css" rel="stylesheet">
 
     <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="JavaScript/RSATest.js" type="text/javascript"></script>
 
     <link rel="icon" 
       type="image/ico" 
@@ -42,8 +43,8 @@
         #SuccessFail {
             color: blue;
         }
-        
         .loader {
+          padding-left: 30 px;
           border: 6px solid #f3f3f3; /* Light grey */
           border-top: 6px solid #3498db; /* Blue */
           border-radius: 50%;
@@ -58,9 +59,6 @@
           100% { transform: rotate(360deg); }
         }
         
-        
-
-        
     </style>
 </head>
 
@@ -74,7 +72,6 @@ include 'navbar.php';
     <h2 id="Heading1">
         RSA
     </h2>
-    
     
     <button id="customCreate" onclick="runPage1()" class="btn-primary btn-large" type="button">Custom Create RSA Keys</button>
     <button id="randomCreate" onclick="runPage2()" class="btn-primary btn-large" type="button">Generate Random Keys</button>
@@ -119,7 +116,7 @@ include 'navbar.php';
    
     <p id="Text1"></p>
     
-     <div id="myDiv2" class="loader"></div> <!--The second loading wheel for getting PKCS keys-->
+    <div id="myDiv2" class="loader"></div> <!--The second loading wheel for getting PKCS keys-->
 
     <p id="Text3"></p>
         
@@ -130,7 +127,7 @@ include 'navbar.php';
     <script src="JavaScript/Boot_Script/bootstrap.js" type="text/javascript"></script>
     <script src="JavaScript/Boot_Script/bootstrap.min.js" type="text/javascript"></script>
     <script src="https://peterolson.github.io/BigInteger.js/BigInteger.min.js"></script>
-    <script src="JavaScript/RSATest.js" type="text/javascript"></script>
+  
 
     <script>
        //var param = gup();

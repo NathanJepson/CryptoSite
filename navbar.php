@@ -1,11 +1,4 @@
-
-<style>
-
-
-</style>
-
 <link href="CSS/navbar.css" type="text/css" rel="stylesheet">
-
 
 <!-- Static navbar -->
 <div class="navbar navbar-default navbar-static-top navbar-inverse" id="myDIV">

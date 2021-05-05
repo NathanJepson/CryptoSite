@@ -44,6 +44,10 @@
             padding-left: 40px;
         }
         
+        #SuccessFail {
+            color: blue;
+        }
+        
         .loader {
           padding-left: 30 px;
           border: 6px solid #f3f3f3; /* Light grey */

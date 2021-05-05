@@ -62,7 +62,7 @@ include 'navbar.php';
        //showLetters(body, heading1);
        $(window).load(function(){ 
            switchLetters(bodyFed, heading1, 4); 
-           $('footer').html("<img id=\"myImg\" src=\"img/Constitution.png\" alt=Constitution>");
+           //$('footer').html("<img id=\"myImg\" src=\"img/Constitution.png\" alt=Constitution>");
        })   
     </script>
 

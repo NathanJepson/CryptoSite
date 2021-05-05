@@ -206,7 +206,7 @@ var Euclid_Inverse = function(a,n) {
   function runPage1()
   {
       document.getElementById("subHeading").innerHTML = '<i>Custom RSA</i>';
-      document.getElementById("form1").innerHTML = '<input type="text" name="first" id="firstprime" size="70"/> First Prime Number<br> <input type="text" name="last" id="secondprime" size="70"/> Second Prime Number<br> <input type="text" class="form-control" id="messagetoencode" placeholder="Message to Encode (Optional)" />  ';
+      document.getElementById("form1").innerHTML = '<input type="text" name="first" id="firstprime" size="120"/> First Prime Number<br> <input type="text" name="last" id="secondprime" size="120"/> Second Prime Number<br> <input type="text" class="form-control" id="messagetoencode" placeholder="Message to Encode (Optional)" />  ';
       document.getElementById("form2").innerHTML = ''; 
       document.getElementById("Text1").innerHTML = "";
       document.getElementById("Text3").innerHTML = "";
@@ -243,6 +243,7 @@ var Euclid_Inverse = function(a,n) {
           
           document.getElementById("keyKnown").onclick = crackKnown;
           document.getElementById("keyUnknown").onclick = crackUnknown;
+          document.getElementById("Button1").onclick = sendError;
   }
   
   
@@ -279,7 +280,14 @@ var Euclid_Inverse = function(a,n) {
       var is_P_num = /^\d+$/.test(p_tmp);
       var is_Q_num = /^\d+$/.test(q_tmp);
       
-      if (!is_P_num || !is_Q_num) {
+
+      if (prime1 == '' || prime1 == null || prime2 == '' || prime2 == null) {
+          document.getElementById("myDiv").style.display = "none";
+          document.getElementById("Text1").innerHTML += '</br><p id="SuccessFail">Please fill in the two required fields.</p>';
+          document.getElementById("SuccessFail").style.color = "red";
+          return;
+      }
+      else if (!is_P_num || !is_Q_num) {
           document.getElementById("myDiv").style.display = "none";
           document.getElementById("Text1").innerHTML += '</br><p id="SuccessFail">Both numbers need to be valid integers.</p>';
           document.getElementById("SuccessFail").style.color = "red";
@@ -290,15 +298,8 @@ var Euclid_Inverse = function(a,n) {
       var p = bigInt(p_tmp);
       var q = bigInt(q_tmp);
       
-          if (p.isPrime() === false || q.isPrime() === false)
-          {
-              document.getElementById("myDiv").style.display = "none";
-              document.getElementById("Text1").innerHTML += '</br><p id="SuccessFail">Both numbers need to be prime.</p>';
-              document.getElementById("SuccessFail").style.color = "red";
       
-              return;
-          }
-          else if (p.compare(q) === 0)
+          if (p.compare(q) === 0)
           {
               document.getElementById("myDiv").style.display = "none";
               document.getElementById("Text1").innerHTML += '</br><p id="SuccessFail">Both numbers need to be different.</p>';
@@ -306,6 +307,15 @@ var Euclid_Inverse = function(a,n) {
       
               return;
           }
+          else if (p.isPrime() === false || q.isPrime() === false)
+          {
+              document.getElementById("myDiv").style.display = "none";
+              document.getElementById("Text1").innerHTML += '</br><p id="SuccessFail">Both numbers need to be prime.</p>';
+              document.getElementById("SuccessFail").style.color = "red";
+      
+              return;
+          }
+          
       
       var e = bigInt(65537);
       
@@ -802,28 +812,6 @@ var Euclid_Inverse = function(a,n) {
       writeText3("-----END RSA PRIVATE KEY-----");
       //writeText("What it is in hex: 0x=" + overarchingSeq);
   }
-  
-  
-  //https://devimalplanet.com/how-to-generate-random-number-in-range-javascript
-  function generateRandomBigInt(lowBigInt, highBigInt) 
-  {
-      if (lowBigInt >= highBigInt) {
-        throw new Error('lowBigInt must be smaller than highBigInt');
-      }
-    
-      const difference = highBigInt - lowBigInt;
-      const differenceLength = difference.toString().length;
-      let multiplier = '';
-      while (multiplier.length < differenceLength) {
-        multiplier += Math.random().toString().split('.')[1];
-      }
-      multiplier = multiplier.slice(0, differenceLength);
-      const divisor = '1' + '0'.repeat(differenceLength);
-    
-      const randomDifference = (bigInt(difference) * bigInt(multiplier)) / bigInt(divisor);
-    
-      return bigInt(lowBigInt + randomDifference);
-  }
 
   function generateRandomNBit(n)
   {
@@ -897,24 +885,23 @@ var Euclid_Inverse = function(a,n) {
   
   function randRSA()
   {
+      
       if (document.getElementById("1024").checked == true) {
-        document.getElementById("Text1").innerHTML = "*Note: Not cryptographically secure.";
-        document.getElementById("Text1").innerHTML = '</br>';
         let primes = findPrimes(1024);
         runRSA(primes[0].toString(),primes[1].toString(),false)
 
-      } else if (document.getElementById("2048").checked == true) {
-        document.getElementById("Text1").innerHTML = "*Note: Not cryptographically secure.";
-        document.getElementById("Text1").innerHTML = '</br>';
+      } else if (document.getElementById("2048").checked == true) {      
         let primes = findPrimes(2048);
         runRSA(primes[0].toString(),primes[1].toString(),false)
+
       } else if (document.getElementById("4096").checked == true) {
-        document.getElementById("Text1").innerHTML = "*Note: Not cryptographically secure.";
-        document.getElementById("Text1").innerHTML = '</br>';
         let primes = findPrimes(4096);
         runRSA(primes[0].toString(),primes[1].toString(),false)
+
       } else {
-        document.getElementById("Text1").innerHTML = "Please select one of the options.";
+        document.getElementById("myDiv").style.display = "none";
+      document.getElementById("Text1").innerHTML += '</br><p id="SuccessFail">Please select one of the options.</p>';
+        document.getElementById("SuccessFail").style.color = "red";
       }
   }
   
@@ -934,6 +921,12 @@ var Euclid_Inverse = function(a,n) {
       document.getElementById("Text1").innerHTML = "";
       document.getElementById("form2").innerHTML = "";
       document.getElementById("Button1").onclick = crack2;
+  }
+  
+  function sendError() {
+      document.getElementById("myDiv").style.display = "none";
+      document.getElementById("Text1").innerHTML += '</br><p id="SuccessFail">Please select one of the options.</p>';
+      document.getElementById("SuccessFail").style.color = "red";
   }
   
   function crack1() {

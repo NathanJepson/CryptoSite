@@ -458,10 +458,10 @@ var Euclid_Inverse = function(a,n) {
               tmpString += decrypted[i];
           }
           
-          document.getElementById("Text1").innerHTML += '</br></br>';
+          document.getElementById("Text1").innerHTML += '</br></br><div id=\'temp7\'></div>';
           
-          document.getElementById("Text1").innerHTML += ("Decrypted Message: " + tmpString);
-          
+          //document.getElementById("Text1").innerHTML += ("Decrypted Message: " + tmpString);
+          document.getElementById("temp7").textContent = "Decrypted Message: " + tmpString;
           
           if (tmpString == currText)
           {
@@ -925,8 +925,25 @@ var Euclid_Inverse = function(a,n) {
   
   function sendError() {
       document.getElementById("myDiv").style.display = "none";
-      document.getElementById("Text1").innerHTML += '</br><p id="SuccessFail">Please select one of the options.</p>';
+      document.getElementById("Text1").innerHTML = '</br><p id="SuccessFail">Please select one of the options.</p>';
       document.getElementById("SuccessFail").style.color = "red";
+  }
+
+  function sendError2() { 
+    document.getElementById("myDiv").style.display = "none";
+    document.getElementById("Text1").innerHTML = '</br><p id="SuccessFail">Fill out all three required fields.</p>';
+    document.getElementById("SuccessFail").style.color = "red";
+  }
+  function sendError3() { 
+    document.getElementById("myDiv").style.display = "none";
+    document.getElementById("Text1").innerHTML = '</br><p id="SuccessFail">N and D need to be valid integers.</p>';
+    document.getElementById("SuccessFail").style.color = "red";
+  }
+  function sendError4() { 
+    document.getElementById("myDiv").style.display = "none";
+    document.getElementById("Text1").innerHTML = '</br><p id="SuccessFail">Please include ciphertext as varying blocks of integers separated by \
+    white space.</p>';
+    document.getElementById("SuccessFail").style.color = "red";
   }
   
   function crack1() {
@@ -936,15 +953,41 @@ var Euclid_Inverse = function(a,n) {
   
       //document.getElementById("Text1").innerHTML = "Cracking...";
       
+      //Remove whitespace
       var n_tmp = document.getElementById("n_var").value.replace(/\s/g,'');
       var d_tmp = document.getElementById("d_var").value.replace(/\s/g,'');
+
+      n_tmp = n_tmp.replace(/,/g, '');
+      d_tmp = d_tmp.replace(/,/g, '');
   
-      var n = bigInt(n_tmp);
-      var d = bigInt(d_tmp);
-      
+      //Variables used to check if N and D are valid integers
+      var is_N_num = /^\d+$/.test(n_tmp);
+      var is_D_num = /^\d+$/.test(d_tmp);
+
       var array_ciphertext = [];
       array_ciphertext = parseCipherText(document.getElementById("cipherText").value);
+
+      var isNotValidCiphertext = false
+      for (var i =0 ; i < array_ciphertext.length; i++) {
+          if (!/^\d+$/.test(array_ciphertext[i]) ) {
+              isNotValidCiphertext = true;
+          }
+      }
       
+      if (n_tmp.length <= 0 || d_tmp.length <= 0 || array_ciphertext.length <= 0) {
+          sendError2();
+          return;
+      } else if (!is_N_num || !is_D_num) {
+        sendError3();
+        return;
+      } else if (isNotValidCiphertext) {
+          sendError4();
+          return;
+      }
+
+      var n = bigInt(n_tmp);
+      var d = bigInt(d_tmp);
+
       var asciiTokens = [];
       document.getElementById("Text1").innerHTML = "Decoded Message: ";
       document.getElementById("Text1").innerHTML += '</br>';
@@ -991,13 +1034,18 @@ var Euclid_Inverse = function(a,n) {
           } else if (cipherText.charAt(i) != '\n') {
               if (trigger) {
                   trigger = false;
-              }
+                 }
               tokenConstructor += cipherText.charAt(i);
           }
       }
       
       if (tokenConstructor != "" && tokenConstructor != " ") {
-          arrayResult.push(bigInt(tokenConstructor));
+        if (!/^\d+$/.test(tokenConstructor)) {
+            arrayResult.push('False');
+        }
+        else {
+            arrayResult.push(bigInt(tokenConstructor));
+        }
       }
       //alert(arrayResult);
       return arrayResult;

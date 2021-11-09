@@ -1,8 +1,9 @@
 # CryptoSite
-This repo currently consists of a Javascript web app which creates RSA keys--either randomly, or shows how an RSA key can be created using two prime numbers. It allows a key to be formatted into PKCS #1 and PKCS #8 formats (which here includes PEM and ASN.1), like as shown below:
+This repo currently consists of a Javascript web app which creates RSA keys--either randomly, or shows how an RSA key can be created using two prime numbers. It allows a key to be formatted into PKCS #1 and PKCS #8 formats (which here includes PEM and base-64 encoded ASN.1), like as shown below:
 
 -----BEGIN PUBLIC KEY-----
 MIGgMA0GCSqGSIb3DQEBAQUAA4GOADCBigKBgQCp4WeYPznVX/Kgk0FepnmJhcg1XZqRW/sdAdoZcCYXD72lItA1hW16mGYUQVzPt7cIOwnJkbgZaTdt+WUee9mpMySjfzu7r0YBhjY0MssHA1lS/IWLMQS4zBgIFEjmTxz7XWDE4FwfU9N/U9hpAfEF+Hpw0b6Dxl84zxwsqmqn6wIEAAEAAQ==
+
 ----END PUBLIC KEY-----
 
 

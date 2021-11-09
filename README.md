@@ -3,7 +3,7 @@ This repo currently consists of a Javascript web app which creates RSA keys--eit
 
 -----BEGIN PUBLIC KEY-----
 MIGgMA0GCSqGSIb3DQEBAQUAA4GOADCBigKBgQCp4WeYPznVX/Kgk0FepnmJhcg1XZqRW/sdAdoZcCYXD72lItA1hW16mGYUQVzPt7cIOwnJkbgZaTdt+WUee9mpMySjfzu7r0YBhjY0MssHA1lS/IWLMQS4zBgIFEjmTxz7XWDE4FwfU9N/U9hpAfEF+Hpw0b6Dxl84zxwsqmqn6wIEAAEAAQ==
- -----END PUBLIC KEY-----
+ ----END PUBLIC KEY-----
 
 
 -----BEGIN RSA PRIVATE KEY-----

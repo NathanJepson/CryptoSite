@@ -14,4 +14,6 @@ The web app also allows for the encryption of test messages (for fun, not for us
 
 Additionally, I have allowed for the decryption of messages if the decryption exponent is known. 
 
+Again, this is merely a teaching tool, and shouldn't be used in a production environment, or for encrypting personal messages. 
+
 
